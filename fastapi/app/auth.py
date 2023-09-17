@@ -2,10 +2,9 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
 
-JWT_SECRET = "markus"
+JWT_SECRET = "secret_key"
 ALGORITHM = "HS256"
 from datetime import datetime, timedelta
-
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -40,7 +39,7 @@ def verify_token(token):
         payload = jwt.decode(token, key=JWT_SECRET)
         return payload
     except:
-        raise Exception("Wrong token")
+        raise Exception("Invalid Token")
 
 
 def check_active(token: str = Depends(oauth2_scheme)):

@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Enum, Integer, String
 
-from .database import Base
-from .schemas import Roles
+from database import Base
+from schemas import Roles
 
 
 class UserModel(Base):
@@ -11,5 +11,5 @@ class UserModel(Base):
     email = Column(String, unique=False, index=True)
     username = Column(String, unique=True)
     hashed_password = Column(String)
-    is_active = Column(Boolean, default=False)
-    role = Column(Enum(Roles), default="user")
+    is_active = Column(Boolean)
+    role = Column(Enum(Roles))

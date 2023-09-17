@@ -9,10 +9,10 @@ class Roles(Enum):
 
 
 class UserSchema(BaseModel):
-    email: EmailStr
-    username: str
-    password: str
-    is_active: bool = False
+    email: EmailStr = "email@test.com"
+    username: str = "username"
+    password: str = "password"
+    is_active: bool = True
     role: Roles = "user"
 
     class Config:

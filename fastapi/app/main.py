@@ -7,8 +7,11 @@ from fastapi.responses import HTMLResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from . import auth, crud, models, schemas
-from .database import engine, get_db
+import auth
+import crud
+import models
+import schemas
+from database import engine, get_db
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -46,19 +49,7 @@ def login_user(token: str, db: Session = Depends(get_db)):
     db_user = crud.get_users_by_username(db, username)
     db_user.is_active = True
     db.commit()
-    return f"""
-    <html>
-        <head>
-            <title>Bestätigung der Registrierung</title>
-        </head>
-        <body>
-            <h2>Aktivierung von {username} erfolgreich!</h2>
-            <a href="https://google.com">
-                Zurück
-            </a>
-        </body>
-    </html>
-    """
+    return username
 
 
 @app.get("/users")
